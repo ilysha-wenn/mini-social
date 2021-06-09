@@ -17,6 +17,9 @@ module.exports.init = (config) => {
         const postRoute = require('./entity/post/router');
         app.use('/api', postRoute);
 
+        const messageRoute = require('./entity/message/router');
+        app.use('/api', messageRoute);
+
         return app; 
     } catch (error) {
         console.log(`Error in block 'INIT':${error}`);

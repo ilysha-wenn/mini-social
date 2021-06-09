@@ -2,6 +2,7 @@ const User = require('./model');
 const UserRole = require('./modelRole');
 const fileService = require('../../serviceFiles/fileService');
 const bcrypt = require('bcrypt');
+const jwt = require('../jwt/index'); 
 
 module.exports.Registration = async(user, picture) => { 
     const {email, username, password } = user;
@@ -28,5 +29,6 @@ module.exports.Login = async(user) => {
     const checkPassword = bcrypt.compareSync(password, account.password);
     if(!checkPassword) throw new Error('password not in db');
 
-    return account;
+    const jsonToken = jwt.generateAccsessToken(account._id, account.role, account.username);
+    return jsonToken;
 }

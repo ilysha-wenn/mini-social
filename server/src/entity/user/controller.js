@@ -20,9 +20,9 @@ module.exports.Login = async(req, res) => {
 
 
 module.exports.userRole = async(req, res) => {
-    try{ const userRoles = new UserRole();
-         await userRoles.save();
-         res.json('Good');
+    try{ const admin = new UserRole({role :'ADMIN'});
+         await admin.save();
+         res.json(admin);
     }catch(e) { res.status(500).json(e)}
 }
 
@@ -31,4 +31,5 @@ module.exports.GetAll = async(req, res) =>{
          res.json(users);
         }catch(e){ res.status(500).json(e)};
 }
+
 
